@@ -8,6 +8,7 @@
     color: #FFFFFF;
     width: auto;
     margin-right: 18px;
+
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -19,5 +20,7 @@
         font-size: 27px;
         line-height: 33px;
         text-align: center;
+
+        margin-right: 0px;
     }
 }

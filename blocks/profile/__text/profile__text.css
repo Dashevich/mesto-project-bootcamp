@@ -6,7 +6,7 @@
     font-size: 18px;
     line-height: 21.78px;
     color: #FFFFFF;
-    margin-top: 16px;
+
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -14,7 +14,7 @@
 
 @media screen and (max-width: 768px) {
     .profile__text {
-        margin-top: 14px;
+        margin-top: 9px;
         font-size: 14px;
         line-height: 17px;
         text-align: center;

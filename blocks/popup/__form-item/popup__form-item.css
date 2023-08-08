@@ -10,14 +10,14 @@
     border: none;
     border-bottom: 1px solid rgb(0,0,0, 0.2);
     outline: none;
-    margin-bottom: 30px;
+    margin-bottom: 38px;
     margin-left: 36px;
     margin-right: 36px;
 }
 
 @media screen and (max-width: 768px) {
     .popup__form-item {
-        margin-bottom: 30px;
+        margin-bottom: 36px;
         margin-left: 22px;
         margin-right: 22px;
     }
