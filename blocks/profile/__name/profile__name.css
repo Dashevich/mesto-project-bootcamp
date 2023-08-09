@@ -6,7 +6,6 @@
     font-size: 42px;
     line-height: 48px;
     color: #FFFFFF;
-    width: auto;
     margin-right: 18px;
 
     text-overflow: ellipsis;
@@ -16,11 +15,9 @@
 
 @media screen and (max-width: 768px) {
     .profile__name {
-        width: 189px;
         font-size: 27px;
         line-height: 33px;
         text-align: center;
-
         margin-right: 0px;
     }
 }

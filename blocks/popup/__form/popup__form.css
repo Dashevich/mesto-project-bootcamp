@@ -1,6 +1,6 @@
 .popup__form {
     margin: 0 auto;
-    width: 430px;
+    max-width: 430px;
     border-radius: 10px;
     background-color: #ffffff;
     align-self: center;
@@ -10,6 +10,6 @@
 
 @media screen and (max-width: 768px) {
     .popup__form {
-        width: 282px;
+        max-width: 282px;
     }
 }

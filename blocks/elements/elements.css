@@ -6,22 +6,21 @@
     grid-template-rows: auto;
     column-gap: 17px;
     row-gap: 20px;
-    width: 880px;
+    max-width: 880px;
 }
 
 @media screen and (max-width: 1024px) {
     .elements {
         margin-top: 36px;
         grid-template-columns: repeat(2, 282px);;
-        width: 581px;
+        max-width: 581px;
     }
 }
 
 @media screen and (max-width: 768px) {
     .elements {
-        margin-top: 36px;
         grid-template-columns: 282px;
-        width: 282px;
+        max-width: 282px;
         row-gap: 22px;
     }
 }

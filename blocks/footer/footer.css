@@ -2,12 +2,14 @@
     margin: 0 auto;
     margin-top: 55px;
     margin-bottom: 60px;
-    width: 880px;
+    max-width: 880px;
+    width: 100%;
 }
 
 @media screen and (max-width: 1024px) {
     .footer {
-        width: 581px;
+        max-width: 581px;
+        width: 100%;
     }
 }
 
@@ -15,6 +17,7 @@
     .footer {
         margin-top: 36px;
         margin-bottom: 36px;
-        width: 282px;
+        max-width: 282px;
+        width: 100%;
     }
 }
