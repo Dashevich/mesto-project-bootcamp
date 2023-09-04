@@ -1,5 +1,6 @@
 .popup__container {
     margin: 0 auto;
+    
     align-self: center;
     justify-self: center;
     position: relative;
@@ -11,7 +12,6 @@
 @media screen and (max-width: 768px) {
     .popup__container {
         max-width: 282px;
-        width: 100%;
         min-height: 322px;
     }
 }

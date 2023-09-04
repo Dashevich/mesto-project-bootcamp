@@ -1,0 +1,15 @@
+.popup__container-pic {
+    margin: 0 auto;
+    
+    align-self: center;
+    justify-self: center;
+    position: relative;
+    width: fit-content;
+    margin-top: 90px;
+}
+
+@media screen and (max-width: 768px) {
+    .popup__container-pic {
+        width: fit-content;
+    }
+}
