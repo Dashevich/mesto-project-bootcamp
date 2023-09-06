@@ -6,9 +6,9 @@ const addButton = document.querySelector('.profile__add-button');
 const editButton = document.querySelector('.profile__edit-button');
 const formButton = document.querySelector('.popup__form-button');
 
-const popupCard = document.querySelector('.popup-card');
-const popupProfile = document.querySelector('.popup-profile');
-const popupPicture = document.querySelector('.popup-picture');
+const popupCard = document.querySelector('.popup_card');
+const popupProfile = document.querySelector('.popup_profile');
+const popupPicture = document.querySelector('.popup_picture');
 
 const closeButtonCard = popupCard.querySelector('.popup__close-button');
 const closeButtonProfile = popupProfile.querySelector('.popup__close-button');
@@ -17,6 +17,15 @@ const closeButtonPicture = popupPicture.querySelector('.popup__close-button');
 const formElementCard = popupCard.querySelector('.popup__form');
 const formElementProfile = popupProfile.querySelector('.popup__form');
 const elementContainer = document.querySelector('.elements');
+
+const nameInput = formElementProfile.querySelector('.popup__form-item_name');
+const infoInput = formElementProfile.querySelector('.popup__form-item_info');
+
+const profilename = profile.querySelector('.profile__name');
+const profiletext = profile.querySelector('.profile__text');
+
+const picturetitle = popupPicture.querySelector('.popup__title');
+const pictureimg = popupPicture.querySelector('.popup__image');
 
 const initialCards = [
     {
@@ -56,29 +65,26 @@ function closePopup(popupForClose) {
 
 function handleFormSubmit(evt) {
     evt.preventDefault(); 
-
-    const nameInput = formElementProfile.querySelector('.popup__form-item_name');
-    const infoInput = formElementProfile.querySelector('.popup__form-item_info');
     
-    profile.querySelector('.profile__name').textContent = nameInput.value;
-    profile.querySelector('.profile__text').textContent = infoInput.value;
+    profilename.textContent = nameInput.value;
+    profiletext.textContent = infoInput.value;
 
     closePopup(popupProfile);
 }
 
-
 function makePicturePopup(name, image) {
-    popupPicture.querySelector('.popup__title').textContent = name;
-    popupPicture.querySelector('.popup__image').src = image;
+    picturetitle.textContent = name;
+    pictureimg.src = image;
+    pictureimg.alt = name;
 }
 
 function addCard(name, image) {
     console.log('click');
-    const elementTemplate = document.querySelector('#element-template').content;
     const element = elementTemplate.querySelector('.element').cloneNode(true);
   
     element.querySelector('.element__title').textContent = name;
     element.querySelector('.element__image').src = image;
+    element.querySelector('.element__image').alt = name;
     
     element.querySelector('.element__like-button').addEventListener('click', function(event) {
         event.target.classList.toggle("element__like-button_active");
@@ -92,8 +98,12 @@ function addCard(name, image) {
         openPopup(popupPicture);
         makePicturePopup(name, image);
     }); 
-    
-    elementContainer.prepend(element);
+
+    return element;
+}
+
+function renderCard(name, image) {
+    elementContainer.prepend(addCard(name, image));
 }
 
 function cardFormSubmit(evt) {
@@ -103,7 +113,8 @@ function cardFormSubmit(evt) {
     const imgInput = formElementCard.querySelector('.popup__form-item_info');
    
     addCard(nameInput.value, imgInput.value);
-
+    nameInput.value = '';
+    imgInput.value = ''
     closePopup(popupCard);
 }
 
@@ -116,11 +127,11 @@ addButton.addEventListener('click', function() {  // доавление карт
 editButton.addEventListener('click', function() {  // изменение профиля
     openPopup(popupProfile);
 
-    const nameValue = profile.querySelector('.profile__name');
-    const infoValue = profile.querySelector('.profile__text');
+    const nameValue = profilename;
+    const infoValue = profiletext;
 
-    document.querySelector('.popup__form-item_name').value = nameValue.textContent;
-    document.querySelector('.popup__form-item_info').value = infoValue.textContent;
+    nameInput.value = nameValue.textContent;
+    infoInput.value = infoValue.textContent;
 
 }); 
 
@@ -141,6 +152,6 @@ formElementCard.addEventListener('submit', cardFormSubmit);
 
 
 initialCards.forEach(function (card) {
-    addCard(card.name, card.link);
+    renderCard(card.name, card.link);
 });
   

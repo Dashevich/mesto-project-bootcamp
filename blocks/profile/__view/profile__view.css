@@ -1,11 +1,12 @@
 .profile__view {
     display: flex;
     flex-direction: row;
-    max-width: 70%;
+    max-width: 80%;
 }
 
 @media screen and (max-width: 768px) {
     .profile__view {
+        max-width: 100%;
         flex-direction: column;
         justify-content: center;
     }

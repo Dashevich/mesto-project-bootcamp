@@ -1,5 +1,6 @@
 .profile {
     margin: 0 auto;
+    padding: 0;
     max-width: 880px;
     width: 100%;
     display: flex;
@@ -15,5 +16,23 @@
         align-items: center;
         margin-left: 100px;
         width: calc(100% - 2 * 100px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 50px;
+        width: calc(100% - 2 * 50px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .profile {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 20px;
+        width: calc(100% - 2 * 20px);
     }
 }
