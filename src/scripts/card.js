@@ -1,4 +1,3 @@
-export {renderCard, makeCards, initialCards}
 import {elementContainer, popupPicture, openPopup, makePicturePopup} from './modal.js'
 
 const elementTemplate = document.querySelector('#element-template').content;
@@ -33,10 +32,11 @@ const initialCards = [
 function addCard(name, image) {
   console.log('click');
   const element = elementTemplate.querySelector('.element').cloneNode(true);
+  const elementImage = element.querySelector('.element__image');
 
   element.querySelector('.element__title').textContent = name;
-  element.querySelector('.element__image').src = image;
-  element.querySelector('.element__image').alt = name;
+  elementImage.src = image;
+  elementImage.alt = name;
   
   element.querySelector('.element__like-button').addEventListener('click', function(event) {
       event.target.classList.toggle("element__like-button_active");
@@ -46,7 +46,7 @@ function addCard(name, image) {
       element.remove();
   }); 
 
-  element.querySelector('.element__image').addEventListener('click', function() {
+  elementImage.addEventListener('click', function() {
       openPopup(popupPicture);
       makePicturePopup(name, image);
   }); 
@@ -63,3 +63,5 @@ function makeCards() {
     renderCard(card.name, card.link);
 });
 }
+
+export {renderCard, makeCards, initialCards}
