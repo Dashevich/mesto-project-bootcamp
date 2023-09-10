@@ -1,0 +1,9 @@
+.profile__edit-avatar {
+    z-index: 1;
+    width: 26px;
+    height: 26px;
+    display: block;
+    position: absolute;
+    margin-top: 47px;
+    margin-left: 47px;
+}

@@ -1,50 +1,67 @@
 import {elementContainer, popupPicture, openPopup, makePicturePopup} from './modal.js'
+import {deleteCard, putLike, deleteLike} from './api.js'
 
 const elementTemplate = document.querySelector('#element-template').content;
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-function addCard(name, image) {
+function addCard(card, user) {
   console.log('click');
   const element = elementTemplate.querySelector('.element').cloneNode(true);
   const elementImage = element.querySelector('.element__image');
+  const name = card.name;
+  const image = card.link;
+  const likes = card.likes.length;
+  const cardId = card._id;
+  const deleteButton = element.querySelector('.element__delete-button');
+  const likeButton = element.querySelector('.element__like-button');
 
   element.querySelector('.element__title').textContent = name;
   elementImage.src = image;
   elementImage.alt = name;
+  element.querySelector('.element__like-count').textContent = likes;
   
-  element.querySelector('.element__like-button').addEventListener('click', function(event) {
-      event.target.classList.toggle("element__like-button_active");
-  }); 
+  for (let i = 0; i < card.likes.length; ++i) {
+    if (card.likes[i]._id === user._id) {
+      likeButton.classList.add("element__like-button_active");
+      break;
+    }
+  } 
 
-  element.querySelector('.element__delete-button').addEventListener('click', function() {
+  likeButton.addEventListener('click', function(event) {
+    if (likeButton.classList.contains('element__like-button_active')) {
+      deleteLike(cardId)
+      .then((res) => {
+        event.target.classList.remove("element__like-button_active");
+        element.querySelector('.element__like-count').textContent = res.likes.length;
+      })
+      .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+      })
+    } else {
+      putLike(cardId)
+      .then((res) => {
+        event.target.classList.add("element__like-button_active");
+        element.querySelector('.element__like-count').textContent = res.likes.length;
+      })
+      .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+      })
+    }
+}); 
+
+if (card.owner._id != user._id) {
+  deleteButton.setAttribute('disabled', '');
+  deleteButton.classList.add('element__delete-button_disabled');
+}
+
+  deleteButton.addEventListener('click', function() {
+    deleteCard(cardId)
+    .then(() => {
       element.remove();
-  }); 
+    })
+    .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+    })
+}); 
 
   elementImage.addEventListener('click', function() {
       openPopup(popupPicture);
@@ -54,14 +71,14 @@ function addCard(name, image) {
   return element;
 }
 
-function renderCard(name, image) {
-  elementContainer.prepend(addCard(name, image));
+function renderCard(card, user) {
+  elementContainer.prepend(addCard(card, user));
 }
 
-function makeCards() {
-  initialCards.forEach(function (card) {
-    renderCard(card.name, card.link);
-});
+function makeCards(cards, user) {
+  cards.forEach(function (card) {
+    renderCard(card, user);
+  });
 }
 
-export {renderCard, makeCards, initialCards}
+export {renderCard, makeCards}

@@ -12,7 +12,10 @@
   <main>
     <section class="profile">
       <div class="profile__view">
-        <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Профиль">
+        <div class="profile__avatar-space">
+          <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Профиль">
+          <img class="profile__edit-avatar profile__edit-avatar_disabled" src="<%=require('./images/edit-avatar.svg')%>" alt="изменить аватар" disabled>
+        </div>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button"></button>
@@ -28,7 +31,10 @@
         <img class="element__image" src="" alt="картинка">
         <div class="element__info">
           <h2 class="element__title"></h2>
-          <button class="element__like-button" type="button"></button>
+          <div class="element__like">
+            <button class="element__like-button" type="button"></button>
+            <p class="element__like-count"></p>
+          </div>        
         </div>
       </div>
     </template>
@@ -78,5 +84,16 @@
     </div>
   </div>
 
+  <div class="popup popup_avatar">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <form class="popup__form" name="avatar">
+        <h2 class="popup__form-title">Обновить аватар</h2>
+        <input class="popup__form-item popup__form-item_info" id="info" name="info" type="url" placeholder="Ссылка на картинку" required>
+        <span class="popup__form-input-error popup__form-info-error"></span>
+        <button class="popup__form-button popup__form-button_disabled" type="submit" disabled>Сохранить</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
