@@ -1,6 +1,7 @@
 // token -> 5e1f8565-6498-4e93-a8b0-c9a80c8a6b36
 // cohort -> exp-mipt-fbc-1
 export {userInfo, editProfile, newCard, deleteCard, putLike, deleteLike, editAvatar}
+import {checkResponse} from './utils.js'
 
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/exp-mipt-fbc-1',
@@ -14,30 +15,14 @@ export const getInitialCards = () => {
     return fetch(`${config.baseUrl}/cards`, {
         headers: config.headers
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-        console.log(err);
-    }); 
+    .then(checkResponse);
 } 
 
 function userInfo() {
     return fetch(`${config.baseUrl}/users/me`, {
         headers: config.headers
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-        console.log(err);
-    }); 
+    .then(checkResponse);
 }
 
 function editProfile(name, about) {
@@ -49,15 +34,7 @@ function editProfile(name, about) {
             about: about
         })
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-        console.log(err);
-    }); 
+    .then(checkResponse);
 }
 
 function newCard(name, link) {
@@ -69,15 +46,7 @@ function newCard(name, link) {
             link: link,
         })
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-        console.log(err);
-    }); 
+    .then(checkResponse);
 }
 
 function deleteCard(cardId) {
@@ -85,15 +54,7 @@ function deleteCard(cardId) {
         method: 'DELETE',
         headers: config.headers
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-        console.log(err);
-    }); 
+    .then(checkResponse);
 }
 
 function putLike(cardId) {
@@ -101,15 +62,7 @@ function putLike(cardId) {
         method: 'PUT',
         headers: config.headers,
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-        console.log(err);
-    }); 
+    .then(checkResponse);
 }
 
 function deleteLike(cardId) {
@@ -117,15 +70,7 @@ function deleteLike(cardId) {
         method: 'DELETE',
         headers: config.headers,
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-        console.log(err);
-    }); 
+    .then(checkResponse);
 }
 
 function editAvatar(link) {
@@ -136,13 +81,5 @@ function editAvatar(link) {
             'avatar': link
         })
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-        console.log(err);
-    }); 
+    .then(checkResponse);
 }

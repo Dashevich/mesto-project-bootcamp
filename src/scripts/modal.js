@@ -1,5 +1,6 @@
 import {renderCard} from './card.js'
 import {editProfile, newCard, editAvatar} from './api.js'
+import {renderLoading} from './utils.js'
 
 const profile = document.querySelector('.profile');
 
@@ -21,6 +22,7 @@ const infoInputCard = formElementCard.querySelector('.popup__form-item_info');
 
 const profilename = profile.querySelector('.profile__name');
 const profiletext = profile.querySelector('.profile__text');
+const profileavatar = profile.querySelector('.profile__avatar')
 
 const picturetitle = popupPicture.querySelector('.popup__title');
 const pictureimg = popupPicture.querySelector('.popup__image');
@@ -28,6 +30,8 @@ const pictureimg = popupPicture.querySelector('.popup__image');
 const submitButtonProfile = popupProfile.querySelector('.popup__form-button');
 const submitButtonCard = popupCard.querySelector('.popup__form-button');
 const submitButtonAvatar = popupAvatar.querySelector('.popup__form-button');
+
+const imgInput = formElementAvatar.querySelector('.popup__form-item_info');
 
 
 function handleProfileSubmit(evt) {
@@ -58,9 +62,8 @@ function handleCardSubmit(evt) {
         nameInputCard.value = '';
         infoInputCard.value = '';
 
-        const buttonElement = popupCard.querySelector('.popup__form-button');
-        buttonElement.setAttribute('disabled', true);
-        buttonElement.classList.add('popup__form-button_disabled');
+        submitButtonCard.setAttribute('disabled', true);
+        submitButtonCard.classList.add('popup__form-button_disabled');
         closePopup(popupCard);
     })
     .catch((err) => {
@@ -73,12 +76,11 @@ function handleCardSubmit(evt) {
 
 function avatarFormSubmit(evt) {
     evt.preventDefault(); 
-    const imgInput = formElementAvatar.querySelector('.popup__form-item_info');
    
     renderLoading(true, submitButtonAvatar);
     editAvatar(imgInput.value)
     .then((res) => {
-        profile.querySelector('.profile__avatar').src = res.avatar;
+        profileavatar.src = res.avatar;
         closePopup(popupAvatar);
     })
     .catch((err) => {
@@ -88,14 +90,6 @@ function avatarFormSubmit(evt) {
         renderLoading(false, submitButtonAvatar);
     });
 }
-
-function renderLoading(isLoading, button) {
-    if (isLoading) {
-        button.textContent = "Сохранение...";
-    } else {
-        button.textContent = "Сохранить";
-    }
-  }
 
 function fillProfileInputs() {
     nameInputProfile.value = profilename.textContent;

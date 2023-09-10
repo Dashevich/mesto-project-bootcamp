@@ -96,6 +96,7 @@ function makePage() {
     .then(([user, cards]) => {
         profileName.textContent = user.name;
         profileText.textContent = user.about;
+        avatarImg.src = user.avatar;
         
         makeCards(cards, user);
     }) 

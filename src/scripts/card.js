@@ -13,11 +13,12 @@ function addCard(card, user) {
   const cardId = card._id;
   const deleteButton = element.querySelector('.element__delete-button');
   const likeButton = element.querySelector('.element__like-button');
+  const likeCount =element.querySelector('.element__like-count');
 
   element.querySelector('.element__title').textContent = name;
   elementImage.src = image;
   elementImage.alt = name;
-  element.querySelector('.element__like-count').textContent = likes;
+  likeCount.textContent = likes;
   
   for (let i = 0; i < card.likes.length; ++i) {
     if (card.likes[i]._id === user._id) {
@@ -31,7 +32,7 @@ function addCard(card, user) {
       deleteLike(cardId)
       .then((res) => {
         event.target.classList.remove("element__like-button_active");
-        element.querySelector('.element__like-count').textContent = res.likes.length;
+        likeCount.textContent = res.likes.length;
       })
       .catch((err) => {
           console.log(`Ошибка: ${err}`);
@@ -40,7 +41,7 @@ function addCard(card, user) {
       putLike(cardId)
       .then((res) => {
         event.target.classList.add("element__like-button_active");
-        element.querySelector('.element__like-count').textContent = res.likes.length;
+        likeCount.textContent = res.likes.length;
       })
       .catch((err) => {
           console.log(`Ошибка: ${err}`);
